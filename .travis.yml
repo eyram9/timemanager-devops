@@ -1,0 +1,18 @@
+language: generic
+
+services:
+  - docker
+
+stages:
+  - name: Build & Push Image
+  - name: Deploy
+
+jobs:
+  include:
+    - stage: Build & Push Image
+      script:
+        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+        - docker build -t "$DOCKER_USERNAME/timemanager-backend" ./TimeManagerAPI
+        - docker build -t "$DOCKER_USERNAME/timemanager-frontend" ./TimeManagerWebInterface/web_interface
+        - docker push "$DOCKER_USERNAME/timemanager-backend"
+        - docker push "$DOCKER_USERNAME/timemanager-frontend"
