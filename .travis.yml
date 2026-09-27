@@ -15,4 +15,5 @@ jobs:
         - docker build -t "$DOCKER_USERNAME/timemanager-backend" ./TimeManagerAPI
         - docker build -t "$DOCKER_USERNAME/timemanager-frontend" ./TimeManagerWebInterface/web_interface
         - docker push "$DOCKER_USERNAME/timemanager-backend"
+        
         - docker push "$DOCKER_USERNAME/timemanager-frontend"
