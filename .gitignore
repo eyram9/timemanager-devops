@@ -1,0 +1,15 @@
+# Environment
+.env
+
+# Elixir
+_build/
+deps/
+
+# Node
+node_modules/
+
+# Frontend build
+dist/
+
+# macOS
+.DS_Store
