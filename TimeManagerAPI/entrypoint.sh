@@ -10,4 +10,5 @@ done
 echo "PostgreSQL is ready!"
 
 mix ecto.create
+mix ecto.migrate
 exec "$@"
