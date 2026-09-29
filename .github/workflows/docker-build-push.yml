@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        
+
 
       - name: Login to Docker Hub
         env:
@@ -33,3 +33,14 @@ jobs:
 
       - name: Push frontend image
         run: docker push "${{ secrets.DOCKER_USERNAME }}/timemanager-frontend"
+ 
+      - name: Deploy to GCP
+        uses: webfactory/ssh-agent@v0.9.1
+        with:
+          ssh-private-key: ${{ secrets.GCP_SSH_KEY }}
+
+      - name: Update GCP server
+        run: |
+          ssh -o StrictHostKeyChecking=no \
+            ${{ secrets.GCP_USER }}@${{ secrets.GCP_HOST }} \
+            "cd ~/timemanager && docker compose pull && docker compose up -d"
